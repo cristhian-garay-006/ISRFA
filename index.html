@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor Multimedia - Adobe Animate Style</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos adicionales para el visor */
+        #viewer-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            background: #1a1a1a;
+        }
+
+        #project-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .viewer-back-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 1001;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Visor de Proyectos (Iframe) para ocultar rutas -->
+    <div id="viewer-container">
+        <div class="viewer-back-btn">
+            <button onclick="closeViewer()" class="back-btn"><span>◀</span> REGRESAR AL MENÚ</button>
+        </div>
+        <iframe id="project-viewer" src=""></iframe>
+    </div>
+
+    <!-- Contenedor Principal -->
+    <div class="stage-container" id="main-menu">
+        <div class="stage-header"></div>
+
+        <div class="stage-content">
+            <div class="title-box">
+                <h1>Menú Principal</h1>
+                <p>Seleccione un módulo para comenzar</p>
+            </div>
+
+            <div class="menu-grid">
+                <div class="animate-btn" onclick="openViewer('principal/principal.html')">
+                    <span class="icon">
+                        <img src="img/principal.jpg" alt="Principal" style="max-width: 64px; height: auto;">
+                    </span>
+                    <span>Principal</span>
+                </div>
+
+                <div class="animate-btn" onclick="openViewer('juego1/juego1.html')">
+                    <span class="icon">
+                        <img src="img/juego.png" alt="Juegos" style="max-width: 64px; height: auto;">
+                    </span>
+                    <span>Juegos</span>
+                </div>
+
+                <div class="animate-btn" onclick="openViewer('cuestionario/cuestionario.html')">
+                    <span class="icon">
+                        <img src="img/test.png" alt="Test Vocacional" style="max-width: 64px; height: auto;">
+                    </span>
+                    <span>Test Vocacional</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="stage-footer"></div>
+    </div>
+
+    <script>
+        function openViewer(url) {
+            const viewer = document.getElementById('project-viewer');
+            const container = document.getElementById('viewer-container');
+            const menu = document.getElementById('main-menu');
+
+            viewer.src = url;
+            container.style.display = 'block';
+            menu.style.display = 'none';
+
+            // Cambiar el título de la pestaña para ocultar que es un archivo específico
+            document.title = "Cargando módulo...";
+        }
+
+        function closeViewer() {
+            const viewer = document.getElementById('project-viewer');
+            const container = document.getElementById('viewer-container');
+            const menu = document.getElementById('main-menu');
+
+            viewer.src = '';
+            container.style.display = 'none';
+            menu.style.display = 'flex';
+
+            document.title = "Reproductor Multimedia - Adobe Animate Style";
+        }
+    </script>
+</body>
+
+</html>
